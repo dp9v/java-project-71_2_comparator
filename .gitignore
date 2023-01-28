@@ -2,3 +2,4 @@
 /app/.gradle/
 
 *.jar
+/app/build/
