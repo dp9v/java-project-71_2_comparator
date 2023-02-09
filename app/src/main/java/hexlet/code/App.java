@@ -18,6 +18,7 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
+        Differ.compare(filepath1, filepath2, format);
         return 0;
     }
 
