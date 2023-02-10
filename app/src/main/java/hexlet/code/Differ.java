@@ -40,22 +40,18 @@ public class Differ {
     }
 
     private static List<Map<String, Object>> compare(String key, Object value1, Object value2) {
+        var result = new ArrayList<Map<String, Object>>();
         if (value1 != null && value2 == null) {
-            return List.of(Map.of("FIELD", key, "STATUS", "-", "VALUE", value1));
+            result.add(Map.of("FIELD", key, "STATUS", "-", "VALUE", value1));
+        } else if (value1 == null && value2 != null) {
+            result.add(Map.of("FIELD", key, "STATUS", "+", "VALUE", value2));
+        } else if (value1.equals(value2)) {
+            result.add(Map.of("FIELD", key, "STATUS", " ", "VALUE", value1));
+        } else if (!value1.equals(value2)) {
+            result.add(Map.of("FIELD", key, "STATUS", "-", "VALUE", value1));
+            result.add(Map.of("FIELD", key, "STATUS", "+", "VALUE", value2));
         }
-        if (value1 == null && value2 != null) {
-            return List.of(Map.of("FIELD", key, "STATUS", "+", "VALUE", value2));
-        }
-        if (value1.equals(value2)) {
-            return List.of(Map.of("FIELD", key, "STATUS", " ", "VALUE", value1));
-        }
-        if (!value1.equals(value2)) {
-            return List.of(
-                Map.of("FIELD", key, "STATUS", "-", "VALUE", value1),
-                Map.of("FIELD", key, "STATUS", "+", "VALUE", value2)
-            );
-        }
-        return List.of();
+        return result;
     }
 
     private static String format(List<Map<String, Object>> fields) {
