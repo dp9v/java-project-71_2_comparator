@@ -5,11 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class Differ {
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -22,7 +19,8 @@ public class Differ {
     }
 
     public static Map<String, Object> readMapFromFile(File file) throws IOException {
-        return MAPPER.readValue(file, new TypeReference<>() {});
+        return MAPPER.readValue(file, new TypeReference<>() {
+        });
     }
 
     public static String format(List<Map<String, Object>> fields) {

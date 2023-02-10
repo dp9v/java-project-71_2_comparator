@@ -25,7 +25,7 @@ public class Comparator {
         if (value1 != null && value2 == null) {
             return List.of(Map.of("FIELD", key, "STATUS", "-", "VALUE", value1));
         }
-        if (value1==null && value2!=null) {
+        if (value1 == null && value2 != null) {
             return List.of(Map.of("FIELD", key, "STATUS", "+", "VALUE", value2));
         }
         if (value1.equals(value2)) {
