@@ -12,6 +12,7 @@ class DifferTest {
 
     @Test
     void compare() throws IOException {
+        System.out.println("!!!!Test");
         ClassLoader classLoader = getClass().getClassLoader();
         var expectedResultUrl = classLoader.getResource("expected_results/plain.txt");
         var fileUrl1 = classLoader.getResource("input_files/file1.json");
