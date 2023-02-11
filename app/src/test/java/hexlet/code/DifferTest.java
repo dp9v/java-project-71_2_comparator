@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DifferTest {
 
@@ -21,6 +21,6 @@ class DifferTest {
         var file2 = new File(fileUrl2.getFile());
         String result = Differ.compare(file1, file2, "stylish");
         var content = new String(expectedResultUrl.openStream().readAllBytes());
-        assertNotEquals(result.trim(), content.trim());
+        assertEquals(result.trim(), content.trim());
     }
 }
