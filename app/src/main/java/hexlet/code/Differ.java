@@ -1,8 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,18 +8,12 @@ import java.util.Map;
 import java.util.TreeSet;
 
 public class Differ {
-    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     public static String compare(File file1, File file2, String style) throws IOException {
-        var json1 = readMapFromFile(file1);
-        var json2 = readMapFromFile(file2);
+        var json1 = Parser.parseFile(file1);
+        var json2 = Parser.parseFile(file2);
         var compareResult = compare(json1, json2);
         return format(compareResult);
-    }
-
-    private static Map<String, Object> readMapFromFile(File file) throws IOException {
-        return MAPPER.readValue(file, new TypeReference<>() {
-        });
     }
 
     private static List<Map<String, Object>> compare(Map<String, Object> json1, Map<String, Object> json2) {

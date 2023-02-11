@@ -14,8 +14,8 @@ class DifferTest {
     void compare() throws IOException {
         ClassLoader classLoader = getClass().getClassLoader();
         var expectedResultUrl = classLoader.getResource("expected_results/plain.txt");
-        var fileUrl1 = classLoader.getResource("input_files/file1.json");
-        var fileUrl2 = classLoader.getResource("input_files/file2.json");
+        var fileUrl1 = classLoader.getResource("input_files/json/file1.json");
+        var fileUrl2 = classLoader.getResource("input_files/json/file2.json");
 
         var file1 = new File(fileUrl1.getFile());
         var file2 = new File(fileUrl2.getFile());
