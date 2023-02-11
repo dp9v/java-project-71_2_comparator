@@ -18,7 +18,7 @@ jobs:
       - name: Build
         run: make build
       - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v3.1.1
+        uses: paambaati/codeclimate-action@v2.7.1
         env:
           CC_TEST_REPORTER_ID: "e58cf71bae8125ed7584f9e435258c6d446fa2551dd7e371c9a6e047d8e897bb"
           JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
