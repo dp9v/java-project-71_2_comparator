@@ -19,7 +19,7 @@ class DifferTest {
 
         var file1 = new File(fileUrl1.getFile());
         var file2 = new File(fileUrl2.getFile());
-        String result = Differ.compare(file1, file2, "stylish");
+        String result = Differ.compare(file1, file2);
         var content = new String(expectedResultUrl.openStream().readAllBytes());
         assertEquals(result.trim(), content.trim());
     }

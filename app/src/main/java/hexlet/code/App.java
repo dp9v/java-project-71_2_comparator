@@ -23,7 +23,8 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        Differ.compare(filepath1, filepath2, format);
+        var formatterType = FormatterTypes.valueOf(format.toUpperCase());
+        Differ.compare(filepath1, filepath2, formatterType);
         return 0;
     }
 

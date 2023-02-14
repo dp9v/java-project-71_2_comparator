@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -30,7 +31,9 @@ class ParserTest {
             "host", "hexlet.io",
             "timeout", 50,
             "proxy", "123.234.53.22",
-            "follow", false
+            "follow", false,
+            "array", List.of(1, 2, 3),
+            "subJson", Map.of("data", "Test")
         );
         return Stream.of(
             Arguments.of("input_files/yaml/file.yaml", expectedMap),
