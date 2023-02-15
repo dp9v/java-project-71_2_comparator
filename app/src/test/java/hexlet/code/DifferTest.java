@@ -2,8 +2,6 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -13,7 +11,7 @@ class DifferTest {
 
 
     @Test
-    void compare() throws IOException, URISyntaxException {
+    void compare() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         var expectedResultUrl = classLoader.getResource("expected_results/plain.txt");
         var expectedContent = Files.readString(Path.of(expectedResultUrl.toURI()));
