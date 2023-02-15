@@ -3,6 +3,7 @@ package hexlet.code;
 import hexlet.code.common.DiffKeys;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,21 +28,24 @@ public class Comparator {
         for (String key : allKeys) {
             var value1 = file1.get(key);
             var value2 = file2.get(key);
-            result.addAll(compareValues(key, value1, value2));
-        }
-        return result;
-    }
+            var keyCompareResults = new HashMap<DiffKeys, Object>();
+            keyCompareResults.put(FIELD, key);
 
-    private static List<Map<DiffKeys, Object>> compareValues(String key, Object value1, Object value2) {
-        var result = new ArrayList<Map<DiffKeys, Object>>();
-        if (value2 == null) {
-            result.add(Map.of(FIELD, key, STATUS, REMOVED, OLD_VALUE, value1));
-        } else if (value1 == null) {
-            result.add(Map.of(FIELD, key, STATUS, ADDED, NEW_VALUE, value2));
-        } else if (Objects.equals(value1, value2)) {
-            result.add(Map.of(FIELD, key, STATUS, SAME, OLD_VALUE, value1));
-        } else {
-            result.add(Map.of(FIELD, key, STATUS, UPDATED, OLD_VALUE, value1, NEW_VALUE, value2));
+            if (!file2.containsKey(key)) {
+                keyCompareResults.put(STATUS, REMOVED);
+                keyCompareResults.put(OLD_VALUE, value1);
+            } else if (!file1.containsKey(key)) {
+                keyCompareResults.put(STATUS, ADDED);
+                keyCompareResults.put(NEW_VALUE, value2);
+            } else if (Objects.equals(value1, value2)) {
+                keyCompareResults.put(STATUS, SAME);
+                keyCompareResults.put(OLD_VALUE, value1);
+            } else {
+                keyCompareResults.put(STATUS, UPDATED);
+                keyCompareResults.put(OLD_VALUE, value1);
+                keyCompareResults.put(NEW_VALUE, value2);
+            }
+            result.add(keyCompareResults);
         }
         return result;
     }

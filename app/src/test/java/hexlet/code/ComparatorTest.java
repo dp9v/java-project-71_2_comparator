@@ -1,10 +1,12 @@
 package hexlet.code;
 
 import hexlet.code.common.DiffKeys;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -18,6 +20,7 @@ import static hexlet.code.common.DiffStatuses.REMOVED;
 import static hexlet.code.common.DiffStatuses.SAME;
 import static hexlet.code.common.DiffStatuses.UPDATED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ComparatorTest {
 
@@ -55,5 +58,16 @@ class ComparatorTest {
     ) {
         var compareResult = Comparator.compare(input1, input2);
         assertEquals(compareResult, expectedResult);
+    }
+
+    @Test
+    void compareShouldReturnNull() {
+        var map1 = new HashMap<String, Object>();
+        map1.put("key", null);
+        var fullCompareResult = Comparator.compare(map1, Map.of());
+        assertEquals(fullCompareResult.size(), 1);
+
+        var compareResult = fullCompareResult.get(0);
+        assertNull(compareResult.get(OLD_VALUE));
     }
 }
