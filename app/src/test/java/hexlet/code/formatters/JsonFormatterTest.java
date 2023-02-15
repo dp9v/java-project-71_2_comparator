@@ -39,8 +39,8 @@ class JsonFormatterTest {
                 List.of(Map.of(STATUS, REMOVED)),
                 "[{\"STATUS\":\"REMOVED\"}]"
             ), Arguments.of(
-                List.of(Map.of(NEW_VALUE, List.of(1, 2, 3))),
-                "[{\"NEW_VALUE\":[1,2,3]}]"
+                List.of(Map.of(NEW_VALUE, List.of(1, 2))),
+                "[{\"NEW_VALUE\":[1,2]}]"
             ), Arguments.of(
                 List.of(Map.of(OLD_VALUE, Map.of("key1", "value"))),
                 "[{\"OLD_VALUE\":{\"key1\":\"value\"}}]"
