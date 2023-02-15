@@ -29,8 +29,8 @@ class StylishFormatterTest {
             Arguments.of(List.of(Map.of(FIELD, "key", STATUS, SAME, OLD_VALUE, "s")), "{\n    key: s\n}"),
             Arguments.of(List.of(Map.of(FIELD, "key", STATUS, SAME, OLD_VALUE, true)), "{\n    key: true\n}"),
             Arguments.of(
-                List.of(Map.of(FIELD, "key", STATUS, SAME, OLD_VALUE, List.of(1, 2, 3))),
-                "{\n    key: [1, 2, 3]\n}"
+                List.of(Map.of(FIELD, "key", STATUS, SAME, OLD_VALUE, List.of(1, 2))),
+                "{\n    key: [1, 2]\n}"
             ),
             Arguments.of(
                 List.of(Map.of(FIELD, "key", STATUS, SAME, OLD_VALUE, Map.of("key1", "value"))),

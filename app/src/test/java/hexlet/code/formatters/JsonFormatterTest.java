@@ -15,32 +15,35 @@ import static hexlet.code.common.DiffKeys.OLD_VALUE;
 import static hexlet.code.common.DiffKeys.STATUS;
 import static hexlet.code.common.DiffStatuses.ADDED;
 import static hexlet.code.common.DiffStatuses.REMOVED;
+import static hexlet.code.common.DiffStatuses.SAME;
 import static hexlet.code.common.DiffStatuses.UPDATED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PlainFormatterTest {
+class JsonFormatterTest {
 
     public static Stream<Arguments> formatterShouldReturnCorrectStringSource() {
         return Stream.of(
             Arguments.of(
-                List.of(Map.of(FIELD, "key", STATUS, REMOVED, OLD_VALUE, 1)),
-                "Property 'key' was removed"
-            ),
-            Arguments.of(
-                List.of(Map.of(FIELD, "key", STATUS, ADDED, NEW_VALUE, 1)),
-                "Property 'key' was added with value: 1"
-            ),
-            Arguments.of(
-                List.of(Map.of(FIELD, "key", STATUS, UPDATED, OLD_VALUE, "value", NEW_VALUE, true)),
-                "Property 'key' was updated. From 'value' to true"
-            ),
-            Arguments.of(
-                List.of(Map.of(FIELD, "key", STATUS, ADDED, NEW_VALUE, List.of(1, 2))),
-                "Property 'key' was added with value: [complex value]"
-            ),
-            Arguments.of(
-                List.of(Map.of(FIELD, "key", STATUS, ADDED, NEW_VALUE, Map.of("key1", "value"))),
-                "Property 'key' was added with value: [complex value]"
+                List.of(Map.of(FIELD, "key")),
+                "[{\"FIELD\":\"key\"}]"
+            ), Arguments.of(
+                List.of(Map.of(STATUS, ADDED)),
+                "[{\"STATUS\":\"ADDED\"}]"
+            ), Arguments.of(
+                List.of(Map.of(STATUS, SAME)),
+                "[{\"STATUS\":\"SAME\"}]"
+            ), Arguments.of(
+                List.of(Map.of(STATUS, UPDATED)),
+                "[{\"STATUS\":\"UPDATED\"}]"
+            ), Arguments.of(
+                List.of(Map.of(STATUS, REMOVED)),
+                "[{\"STATUS\":\"REMOVED\"}]"
+            ), Arguments.of(
+                List.of(Map.of(NEW_VALUE, List.of(1, 2, 3))),
+                "[{\"NEW_VALUE\":[1,2,3]}]"
+            ), Arguments.of(
+                List.of(Map.of(OLD_VALUE, Map.of("key1", "value"))),
+                "[{\"OLD_VALUE\":{\"key1\":\"value\"}}]"
             )
         );
     }
@@ -50,8 +53,8 @@ class PlainFormatterTest {
     void formatterShouldReturnCorrectString(
         List<Map<DiffKeys, Object>> diff,
         String expectedResult
-    ) {
-        var formattedDiff = PlainFormatter.format(diff);
+    ) throws Exception {
+        var formattedDiff = JsonFormatter.format(diff);
         assertEquals(expectedResult, formattedDiff);
     }
 }

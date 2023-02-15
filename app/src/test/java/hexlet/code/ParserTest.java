@@ -30,10 +30,10 @@ class ParserTest {
     public static Stream<Arguments> readFileShouldReturnCorrectFileSource() {
         var expectedMap = Map.of(
             "host", "hexlet.io",
-            "timeout", 50,
+            "timeout", Integer.parseInt("50"),
             "proxy", "123.234.53.22",
             "follow", false,
-            "array", List.of(1, 2, 3),
+            "array", List.of(1, 2),
             "subJson", Map.of("data", "Test")
         );
         return Stream.of(

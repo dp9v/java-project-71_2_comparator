@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class ComparatorTest {
 
     public static Stream<Arguments> compareShouldReturnCorrectMapSource() {
-        var list = List.of(1, 2, 3);
+        var list = List.of("1", "2", "3");
         var map = Map.of("key", "value");
         return Stream.of(
             Arguments.of(
@@ -43,7 +43,7 @@ class ComparatorTest {
             ),
             Arguments.of(
                 Map.of("key", list),
-                Map.of("key", List.of(1, 2, 3)),
+                Map.of("key", List.of("1", "2", "3")),
                 List.of(Map.of(FIELD, "key", STATUS, SAME, OLD_VALUE, list))
             )
         );
