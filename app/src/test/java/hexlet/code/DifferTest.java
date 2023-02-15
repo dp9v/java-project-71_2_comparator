@@ -21,7 +21,7 @@ class DifferTest {
         var fileFullPath1 = classLoader.getResource("input_files/json/file1.json").getPath();
         var fileFullPath2 = classLoader.getResource("input_files/json/file2.json").getPath();
 
-        String result = Differ.compare(fileFullPath1, fileFullPath2);
+        String result = Differ.generate(fileFullPath1, fileFullPath2);
         assertEquals(result.trim(), expectedContent.trim());
     }
 }

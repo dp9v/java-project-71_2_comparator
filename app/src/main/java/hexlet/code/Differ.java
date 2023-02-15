@@ -11,11 +11,11 @@ import java.util.Map;
 
 public class Differ {
 
-    public static String compare(String file1, String file2) throws IOException {
-        return compare(file1, file2, "Stylish");
+    public static String generate(String file1, String file2) throws IOException {
+        return generate(file1, file2, "Stylish");
     }
 
-    public static String compare(String file1, String file2, String formatterType) throws IOException {
+    public static String generate(String file1, String file2, String formatterType) throws IOException {
         var json1 = readFile(file1);
         var json2 = readFile(file2);
         var compareResult = Comparator.compare(json1, json2);
