@@ -4,8 +4,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.io.File;
-import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -16,12 +16,13 @@ class ParserTest {
 
     @ParameterizedTest
     @MethodSource("readFileShouldReturnCorrectFileSource")
-    void parseFileShouldReturnCorrectMap(String fileName, Map<String, Object> expectedResult) throws IOException {
-
+    void parseFileShouldReturnCorrectMap(
+        String fileName, String format, Map<String, Object> expectedResult
+    ) throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        var fileUrl = classLoader.getResource(fileName);
-        var file = new File(fileUrl.getFile());
-        var result = Parser.parseFile(file);
+        var expectedResultUrl = classLoader.getResource(fileName);
+        var parsedContent = Files.readString(Path.of(expectedResultUrl.toURI()));
+        var result = Parser.parse(parsedContent, format);
         assertEquals(result, expectedResult);
     }
 
@@ -36,8 +37,9 @@ class ParserTest {
             "subJson", Map.of("data", "Test")
         );
         return Stream.of(
-            Arguments.of("input_files/yaml/file.yaml", expectedMap),
-            Arguments.of("input_files/json/file1.json", expectedMap)
+            Arguments.of("input_files/yaml/file.yaml", "yml", expectedMap),
+            Arguments.of("input_files/yaml/file.yaml", "yaml", expectedMap),
+            Arguments.of("input_files/json/file1.json", "json", expectedMap)
         );
     }
 }

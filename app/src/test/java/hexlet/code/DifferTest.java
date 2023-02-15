@@ -2,8 +2,10 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,16 +13,15 @@ class DifferTest {
 
 
     @Test
-    void compare() throws IOException {
+    void compare() throws IOException, URISyntaxException {
         ClassLoader classLoader = getClass().getClassLoader();
         var expectedResultUrl = classLoader.getResource("expected_results/plain.txt");
-        var fileUrl1 = classLoader.getResource("input_files/json/file1.json");
-        var fileUrl2 = classLoader.getResource("input_files/json/file2.json");
+        var expectedContent = Files.readString(Path.of(expectedResultUrl.toURI()));
 
-        var file1 = new File(fileUrl1.getFile());
-        var file2 = new File(fileUrl2.getFile());
-        String result = Differ.compare(file1, file2);
-        var content = new String(expectedResultUrl.openStream().readAllBytes());
-        assertEquals(result.trim(), content.trim());
+        var fileFullPath1 = classLoader.getResource("input_files/json/file1.json").getPath();
+        var fileFullPath2 = classLoader.getResource("input_files/json/file2.json").getPath();
+
+        String result = Differ.compare(fileFullPath1, fileFullPath2);
+        assertEquals(result.trim(), expectedContent.trim());
     }
 }
