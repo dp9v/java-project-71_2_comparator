@@ -33,7 +33,7 @@ public class PlainFormatter {
                 }
             );
         }
-        return result.toString();
+        return result.deleteCharAt(result.length() - 1).toString();
     }
 
     public static String format(Object value) {

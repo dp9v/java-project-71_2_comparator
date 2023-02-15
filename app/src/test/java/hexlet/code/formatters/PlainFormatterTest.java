@@ -24,23 +24,23 @@ class PlainFormatterTest {
         return Stream.of(
             Arguments.of(
                 List.of(Map.of(FIELD, "key", STATUS, REMOVED, OLD_VALUE, 1)),
-                "Property 'key' was removed\n"
+                "Property 'key' was removed"
             ),
             Arguments.of(
                 List.of(Map.of(FIELD, "key", STATUS, ADDED, NEW_VALUE, 1)),
-                "Property 'key' was added with value: 1\n"
+                "Property 'key' was added with value: 1"
             ),
             Arguments.of(
                 List.of(Map.of(FIELD, "key", STATUS, UPDATED, OLD_VALUE, "value", NEW_VALUE, true)),
-                "Property 'key' was updated. From 'value' to true\n"
+                "Property 'key' was updated. From 'value' to true"
             ),
             Arguments.of(
                 List.of(Map.of(FIELD, "key", STATUS, ADDED, NEW_VALUE, List.of(1, 2, 3))),
-                "Property 'key' was added with value: [complex value]\n"
+                "Property 'key' was added with value: [complex value]"
             ),
             Arguments.of(
                 List.of(Map.of(FIELD, "key", STATUS, ADDED, NEW_VALUE, Map.of("key1", "value"))),
-                "Property 'key' was added with value: [complex value]\n"
+                "Property 'key' was added with value: [complex value]"
             )
         );
     }
