@@ -1,8 +1,9 @@
 package hexlet.code.common;
 
 public enum DiffStatuses {
-    ADDED("+"),
-    REMOVED("-"),
+    ADDED(" "),
+    REMOVED(" "),
+    UPDATED(" "),
     SAME(" ");
 
     public final String value;
