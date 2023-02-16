@@ -50,8 +50,8 @@ class PlainFormatterTest {
     void formatterShouldReturnCorrectString(
         List<Map<DiffKeys, Object>> diff,
         String expectedResult
-    ) {
-        var formattedDiff = PlainFormatter.format(diff);
+    ) throws Exception {
+        var formattedDiff = Formatter.format(diff, "plain");
         assertEquals(expectedResult, formattedDiff);
     }
 }

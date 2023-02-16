@@ -54,7 +54,7 @@ class JsonFormatterTest {
         List<Map<DiffKeys, Object>> diff,
         String expectedResult
     ) throws Exception {
-        var formattedDiff = JsonFormatter.format(diff);
+        var formattedDiff = Formatter.format(diff, "json");
         assertEquals(expectedResult, formattedDiff);
     }
 }

@@ -48,8 +48,8 @@ class StylishFormatterTest {
     void formatterShouldReturnCorrectString(
         List<Map<DiffKeys, Object>> diff,
         String expectedResult
-    ) {
-        var formattedDiff = StylishFormatter.format(diff);
+    ) throws Exception {
+        var formattedDiff = Formatter.format(diff, "stylish");
         assertEquals(expectedResult, formattedDiff);
     }
 }
